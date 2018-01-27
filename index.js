@@ -60,7 +60,7 @@ var onListening = function () {
     this._onionSocket.write(cmd);
   }.bind(this);
 
-  connecttor.connect(function (controlSocket) {
+  connecttor.connect(this._onionOpts, function (controlSocket) {
     if (!controlSocket) {
       this.emit('error', new Error("Onion Connection failed."));
       this.close();
