@@ -23,12 +23,11 @@ var getKeyBlob = function (stream, cb) {
     }
   }
   var data = "";
+  stream.setEncoding('utf-8')
   stream.on('readable', function () {
     var dat = stream.read();
-    if (!dat || dat.length === 0) {
-      cb(data);
-    } else {
-      data =+ dat.toString("hex");
+    if (dat != null && dat.length > 0) {
+      cb(dat);
     }
   });
 };
