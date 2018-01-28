@@ -129,14 +129,20 @@ var listen = function(httpListen, options) {
   httpListen.call(this, 0, '127.0.0.1');
 };
 
+var bindServer = function (options, server) {
+  server.listen = listen.bind(server, server.listen, options);
+  return server;
+}
+
 var createServer = function (options, requestListener) {
   if (typeof options === 'function' && !requestListener) {
     requestListener = options;
     options = {};
   }
   var server = http.createServer(requestListener);
-  server.listen = listen.bind(server, server.listen, options);
-  return server;
+  return bindServer(options, server);
 };
 
+exports.bindServer = createServer;
 exports.createServer = createServer;
+exports.listen = listen;
