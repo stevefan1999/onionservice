@@ -143,6 +143,6 @@ var createServer = function (options, requestListener) {
   return bindServer(options, server);
 };
 
-exports.bindServer = createServer;
+exports.bindServer = bindServer;
 exports.createServer = createServer;
 exports.listen = listen;
